@@ -1,0 +1,289 @@
+<!-- <div class="resize-modal">
+    <ng-template #template>
+      <div class="backdrop in">
+        <div class="modal-body">
+          <app-certificate #certificateEl [dataId]="dataId"
+            (closeModal)="closeModal()"></app-certificate>
+        </div>
+      </div>
+    </ng-template>
+  </div> -->
+<div
+  *ngIf="!hideDetailView && !loading"
+  class="detail-container col-md-offset-1 col-md-10"
+  style="width: 100%; margin-left: 0"
+>
+  <div *ngIf="data" class="row">
+    <div class="col-lg-12">
+      <div style="text-align: center">
+        <h2 style="color: #446976; font-family: cursive">{{ data.name }}</h2>
+        <span style="font-size: 20px">{{ data.status }}</span>
+        <!-- [ngClass]="statusClass() -->
+        <!-- <img height="100" width="100" alt="image" class="img-circle resize-image" src="assets/images/certificate-logo.png"> -->
+        <div
+          style="float: right; margin-top: -40px"
+          *ngIf="status == 'approved'"
+        >
+          <button
+            class="btn btn-info detail-buttons preview-button"
+            data-toggle="tooltip"
+            (click)="openDetail('pay')"
+            data-placement="top"
+            title="Send to finance"
+            style="font-weight: bolder"
+          >
+            <!-- *ngIf="data.status == status.approved"
+          (click)="openModal(template)" -->
+            <i class="fa fa-eye">Paid</i>
+          </button>
+        </div>
+        <div
+          style="float: right; margin-top: -40px"
+          *ngIf="status == 'paid'"
+        >
+          <button
+            class="btn btn-info detail-buttons preview-button"
+            data-toggle="tooltip"
+            (click)="openDetail('sign')"
+            data-placement="top"
+            title="Send to finance"
+            style="font-weight: bolder"
+          >
+            <!-- *ngIf="data.status == status.approved"
+          (click)="openModal(template)" -->
+            <i class="fa fa-eye">Sign</i>
+          </button>
+        </div>
+
+        <div
+          style="float: right; margin-top: -40px"
+          *ngIf="status == 'pending'"
+        >
+          <button
+            class="btn btn-info detail-buttons preview-button"
+            data-toggle="tooltip"
+            (click)="openDetail('view')"
+            data-placement="top"
+            title="Send to finance"
+            style="font-weight: bolder"
+          >
+            <!-- *ngIf="data.status == status.approved"
+          (click)="openModal(template)" -->
+            <i class="fa fa-eye">Approve</i>
+          </button>
+          <button
+            class="btn btn-warning detail-buttons"
+            data-toggle="tooltip"
+            (click)="openDetail('edit')"
+            data-placement="top"
+            title="Edit data"
+          >
+            <!-- [hideIfNotPublic]="'/data/edit'"
+          routerLink="/data/edit/parsedataId(data)" -->
+            <i class="fa fa-edit">Edit</i>
+          </button>
+
+          <button
+            class="btn btn-danger detail-buttons"
+            data-toggle="tooltip"
+            (click)="openDetail('delete')"
+            data-placement="top"
+            title="Edit data"
+          >
+            <!-- [hideIfNotPublic]="'/data/edit'"
+        routerLink="/data/edit/parsedataId(data)" -->
+            <i class="fa fa-edit">Delete</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div
+      class="wrapper border-bottom white-bg page-heading ng-scope  detail-header">
+      <div class="locateFacilities">
+        <div #detailmap style="height:16em; position:relative">
+          <h1 class="center-absolute emptyResult"
+            *ngIf="data && !data.coordinates">
+            Map Not Available
+          </h1>
+        </div>
+      </div>
+    </div> -->
+  <section id="contentSection" style="margin-top: 30px">
+    <table class="table table-bordered nonExpandingListTable" *ngIf="data">
+      <thead>
+        <th colspan="3">
+          <p>General Information</p>
+        </th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div>Name</div>
+            <strong>
+              {{ data.name }}
+            </strong>
+          </td>
+          <td>
+            <div>Gender</div>
+            <strong>
+              {{ data.gender }}
+            </strong>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div>Appleid For</div>
+            <strong>
+              {{ data.professional_register[len].applied_for }}
+            </strong>
+          </td>
+          <td>
+            <div>Type of Registration</div>
+            <strong>
+              <!-- <td>{{ user.professional_register[0].type }}</td> -->
+              <!-- <td>{{ user.professional_register[0].applied_for }}</td> -->
+
+              {{ data.professional_register[len].type }}
+            </strong>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table table-bordered nonExpandingListTable" *ngIf="data">
+      <thead>
+        <th colspan="3">
+          <p>Address</p>
+        </th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div>City</div>
+            <strong>{{ data.city }}</strong>
+          </td>
+          <td>
+            <div>Woreda</div>
+            <strong>
+              {{ data.woreda }}
+            </strong>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div>Kebele</div>
+            <strong>
+              {{ data.kebele }}
+            </strong>
+          </td>
+          <td>
+            <div>House Number</div>
+            <strong>
+              {{ data.house_no }}
+            </strong>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div>Phone Number</div>
+            <strong>
+              {{ data.phone_number }}
+            </strong>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table
+      class="table table-bordered nonExpandingListTable"
+      *ngIf="data && data.educations"
+    >
+      <thead>
+        <th colspan="3">
+          <p>Educational Record</p>
+        </th>
+      </thead>
+      <tbody *ngFor="let edu of data.educations; let i = index">
+        <div class="m-1 p-2">
+          <strong>Education Record {{ i + 1 }}</strong>
+        </div>
+        <tr>
+          <td>
+            <div>institution</div>
+            <strong>
+              {{ edu.educational_institute }}
+            </strong>
+          </td>
+          <td>
+            <div>Field of Study</div>
+            <strong>
+              {{ edu.field_of_study }}
+            </strong>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div>Professional Title</div>
+            <strong>
+              {{ edu.professional_title }}
+            </strong>
+          </td>
+          <td>
+            <div>Date Recieved</div>
+            <strong>
+              {{ edu.date_received }}
+            </strong>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table
+      class="table table-bordered nonExpandingListTable"
+      *ngIf="data && data.employment_records"
+    >
+      <thead>
+        <th colspan="3">
+          <p>Employment Record</p>
+        </th>
+      </thead>
+      <tbody *ngFor="let edu of data.employment_records; let i = index">
+        <div class="m-1 p-2">
+          <strong>Employment Record {{ i + 1 }}</strong>
+        </div>
+        <tr>
+          <td>
+            <div>Employee</div>
+            <strong>
+              {{ edu.employer }}
+            </strong>
+          </td>
+          <td>
+            <div>Start Date</div>
+            <strong>
+              {{ edu.start_date }}
+            </strong>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div>End Date</div>
+            <strong>
+              {{ edu.end_date }}
+            </strong>
+          </td>
+          <!-- <td><div>Date Recieved</div>
+            <strong>
+                {{edu.dateRecieved}}
+            </strong>
+            </td> -->
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</div>
+
+<div *ngIf="hideDetailView && !loading" class="detail-container">
+  <div #detailmap style="height: 16em; position: relative"></div>
+  <h1 class="center-absolute emptyResult" *ngIf="data && !data.coordinates">
+    data Detail Not Available For Public View
+  </h1>
+</div>

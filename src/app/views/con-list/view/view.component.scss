@@ -1,0 +1,221 @@
+
+
+.generate-button{
+    background: #d9534f;
+    color: white
+  }
+  .center-align .row>label{
+    padding-left: 25%;
+  }
+  .center-align .row>p{
+   padding-left: 25%
+  }
+  .detail-container{
+    background: white;
+    padding: 10px 14px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    position:relative;
+  
+  }
+  
+  #headerSection{
+    text-align: center;
+  }
+  
+  .dropdown-menu.show{
+    display:block
+  }
+  .lower-header{
+    margin-top: 45px;
+  }
+  #headerSection .lower-header h3:first-child{
+    margin-bottom: -2px;
+    font-weight: bold;
+  }
+  #contentSection>span{
+    width: 90%;
+    margin: 0 auto;
+    font-size: 19px;
+  }
+  
+  .bordered {
+    border: 1px solid #000;
+  }
+  
+  .table{
+    margin-top: 1em;
+  }
+  
+  #contentSection table.table-bordered > thead > th{
+    border: 0px !important;
+    background-color: #7197ad78;
+    padding: 12px 0px 0px 12px;
+    font-size: 16px;
+    /*padding-left: 8px;*/
+  }
+  #contentSection table.table-bordered tbody > tr > td{
+    border: 1px solid #333 !important;
+    height: 50px;
+  }
+  #pocTable> tbody > tr > td{
+    width: 33%;
+    padding-left:2%;
+  }
+  
+  .expandableListTable> tbody > tr > td,
+  .nonExpandingListTable> tbody > tr > td{
+    width: 33%;
+    padding-left:2%;
+  }
+  
+  .expandableListTable > thead{
+    transition: 0.5s all ease;
+  }
+  
+  .expandableListTable > thead:hover{
+    cursor: pointer;
+    background-color: #95b2c3;
+  }
+  
+  #medicalEquipmentTable> tbody > tr > td{
+    width: 33%;
+    padding-left:2%;
+  }
+  
+  #staffingTable h3{
+    font-weight: 100;
+  }
+  
+  #footerSection {
+    margin-bottom: 30px;
+  }
+  
+  #footerSection div i {
+    margin-left: 25px;
+  }
+  
+  #footerSection div i > strong {
+    margin-left: 5px;
+  }
+  .entry-box{
+    width: 97%;
+    border: 1px solid #424242;
+    height: 60%;
+    padding-left:7px
+  
+  }
+  
+  .entry-box-2{
+    width: 97%;
+    border: 1px solid #424242;
+    height: 20px !important;
+  }
+  #bottomTextSection{
+  
+  }
+  .authorization-signature{
+    width:30%;
+    margin: 0 auto;
+    padding-top: 10px;
+  }
+  
+  .authorization-signature>span{
+    width:100%;
+    border: 2px solid #000;
+  }
+  .authorization-signature p{
+    text-align: center;
+  }
+  
+  .authorization-signature hr {
+    border: none;
+    height: 1px;
+    color: #333;
+    background-color: #333;
+  }
+  #facilityStatusSection{
+    padding: 10px 14px;
+    margin-bottom:15px;
+  }
+  #facilityStatusSection>div{
+    height: 140px;
+    border: 1px solid #000;
+  
+  }
+  #facilityStatusSection>div div{
+    position: relative;
+  }
+  #facilityStatusSection>div div:not(:nth-child(3)){
+    height: 100%;
+    border-right: 1px solid #000;
+  }
+  #facilityStatusSection>div div p {
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: -3px;
+  }
+  .horiz_line{
+    width:117px;
+    height:1px;
+    background: #000;
+    display:inline-block;
+    padding:0;
+    margin-top:2em;
+    position:relative;
+  }
+  .horiz_line p{
+    position: absolute;
+    top:-15px;
+    left:4px;
+  }
+  
+  /*Styling Redirect Buttons*/
+  
+  .detail-buttons{
+    margin-right: 5px;
+    margin-top: 20px;
+  }
+  
+  .added-opacity{
+    opacity: 0.7
+  }
+  .preview-button{
+    /* top:1em;
+    right:20px;
+    border-color: rgb(214,35,35,0.7);
+    background-color: rgb(214,35,35,0.8) */
+  }
+  
+  .modal-backdrop
+  {
+    opacity:0.75 !important;
+  }
+  
+  .detailList{
+    list-style-type: none;
+    padding:0;
+    margin:0;
+  }
+  .detailList li{
+    padding: 4px 2px 4px 7px;
+  }
+  .expendableTableIcon{
+    float: right;
+    margin-right: 20px;
+    -moz-transition: all 0.3s linear;
+    -webkit-transition: all 0.3s linear;
+    transition: all 0.3s linear;
+  }
+  .notExpandedIcon{
+    -ms-transform: rotate(0deg); /* IE 9 */
+    -webkit-transform: rotate(0deg); /* Safari 3-8 */
+    transform: rotate(0deg);
+  }
+  .expandedIcon{
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Safari 3-8 */
+    transform: rotate(90deg);
+    transform: 0.5s all ease;
+  }
+  

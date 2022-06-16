@@ -1,0 +1,374 @@
+<div
+  *ngIf="!hideDetailView && !loading"
+  class="detail-container col-md-offset-1 col-md-10"
+  style="width: 100%; margin-left: 0"
+>
+  <div *ngIf="data" class="row">
+    <div class="col-lg-12">
+      <div style="text-align: center">
+        <h2 style="color: #446976; font-family: cursive">
+          {{ data.first_name + " " + data.last_name }}
+        </h2>
+        <span style="font-size: 20px">{{ data.status }}</span>
+        <!-- [ngClass]="statusClass() -->
+        <!-- <img height="100" width="100" alt="image" class="img-circle resize-image" src="assets/images/certificate-logo.png"> -->
+        <div style="float: right; margin-top: -40px">
+          <button
+            class="btn btn-warning detail-buttons"
+            data-toggle="tooltip"
+            (click)="openDetail('edit')"
+            data-placement="top"
+            title="Edit data"
+          >
+            <!-- [hideIfNotPublic]="'/data/edit'"
+          routerLink="/data/edit/parsedataId(data)" -->
+            <i class="fa fa-edit">Edit</i>
+          </button>
+          <button
+            class="btn btn-info detail-buttons preview-button"
+            data-toggle="tooltip"
+            (click)="openDetail('view')"
+            data-placement="top"
+            title="Send to finance"
+            style="font-weight: bolder;"
+          >
+            <!-- *ngIf="data.status == status.approved"
+          (click)="openModal(template)" -->
+            <i class="fa fa-eye">Approve</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div
+      class="wrapper border-bottom white-bg page-heading ng-scope  detail-header">
+      <div class="locateFacilities">
+        <div #detailmap style="height:16em; position:relative">
+          <h1 class="center-absolute emptyResult"
+            *ngIf="data && !data.coordinates">
+            Map Not Available
+          </h1>
+        </div>
+      </div>
+    </div> 
+                    <tr>
+                      <th>Personal Information</th>
+                    </tr>
+                    <tr>
+                      <td>Owner First Name</td>
+                      <td>{{ data.ownerFirstName }}</td>
+                    </tr>
+                    <tr>
+                      <td>Gender</td>
+                      <td>{{ data.sex }}</td>
+                    </tr>
+                    <tr>
+                      <td>General Manager</td>
+                      <td>{{ data.generalManagerName }}</td>
+                    </tr>
+
+-->
+  <section id="contentSection" style="margin-top: 30px">
+    <table class="table table-bordered nonExpandingListTable" *ngIf="data">
+      <thead>
+        <th colspan="3">
+          <p>Personal Information</p>
+        </th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div>Owner Name</div>
+            <strong>
+              {{ data.first_name + " " + data.last_name }}
+            </strong>
+          </td>
+          <td>
+            <div>Owner Father Name</div>
+            <strong>
+              {{ data.last_name }}
+            </strong>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div>Construction Service Type</div>
+            <strong>
+              {{ data.service_type }}
+            </strong>
+          </td>
+          <td>
+            <div>Construction Service Level</div>
+            <strong> {{data.service_level}} </strong>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+    <table class="table table-bordered nonExpandingListTable" *ngIf="data && data.shareholders">
+      <thead>
+        <th colspan="3">
+          <p>Share Holders</p>
+        </th>
+      </thead>
+      <tbody *ngFor="let edu of data.shareholders; let i = index">
+        <tr>
+          <td>
+            <div>Name</div>
+            <strong>
+              {{ edu.shareholders }}
+            </strong>
+          </td>
+          <td>
+            <div>Share Amount</div>
+            <strong>
+              {{ edu.share_amount }}
+            </strong>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table table-bordered nonExpandingListTable" *ngIf="data">
+      <thead>
+        <th colspan="3">
+          <p>Address</p>
+        </th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div>Region</div>
+            <strong>
+              {{ data.region }}
+            </strong>
+          </td>
+          <td>
+            <div>Zone</div>
+            <strong> {{ data.zone }}</strong>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div>City</div>
+            <strong>{{ data.city }} </strong>
+          </td>
+
+          <td>
+            <div>Woreda</div>
+            <strong>{{ data.woreda }}</strong>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div>Kebele</div>
+            <strong>{{ data.kebele }}</strong>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table table-bordered nonExpandingListTable" *ngIf="data && data.projects">
+      <thead>
+        <th colspan="3">
+          <p>Projects</p>
+        </th>
+      </thead>
+      <tbody *ngFor="let edu of data.projects; let i = index">
+        <div class="m-1 p-2">
+          <strong>Project Number {{ i + 1 }}</strong>
+        </div>
+        <tr>
+          <td>
+            <div>Project Name</div>
+            <strong>{{ edu.project_name }}</strong>
+          </td>
+          <td>
+            <div>Project Value</div>
+            <strong>
+              {{ edu.project_value }}
+            </strong>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table table-bordered nonExpandingListTable" *ngIf="data && data.employee_records">
+      <thead>
+        <th colspan="3">
+          <p>employees</p>
+        </th>
+      </thead>
+      <tbody *ngFor="let edu of data.employee_records; let i = index">
+        <div class="m-1 p-2">
+          <strong>Employees {{ i + 1 }}</strong>
+        </div>
+        <tr>
+          <td>
+            <div>Employee Name</div>
+            <strong>{{ edu.position }}</strong>
+          </td>
+          <td>
+            <div>Employment Type</div>
+            <strong>
+              {{ edu.employment_type }}
+            </strong>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div>Position</div>
+            <strong>
+              {{ edu.position }}
+            </strong>
+          </td>
+          <td>
+            <div>Number Of Employee</div>
+            <strong>
+              {{ edu.number_of_employees }}
+            </strong>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table table-bordered nonExpandingListTable" *ngIf="data && data.contractor_property">
+      <thead>
+        <th colspan="3">
+          <p>Construction Material</p>
+        </th>
+      </thead>
+      <tbody *ngFor="let edu of data.contractor_property; let i = index">
+        <!-- <div class="m-1 p-2">
+              <strong>Employees {{ i + 1 }}</strong>
+            </div> -->
+        <tr>
+          <td>
+            <div>Material Type</div>
+            <strong>
+              {{ edu.property_type_id }}
+            </strong>
+          </td>
+          <td>
+            <div>Capacity</div>
+            <strong>
+              {{ edu.capacity }}
+            </strong>
+          </td>
+          <td>
+            <div>Manufactured Date</div>
+            <strong>
+              {{ edu.manufactured_date }}
+            </strong>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- <div class="col-6" *ngFor="let edu of data.employees">
+    <table>
+      <tr>
+          <th>Employees</th>
+        </tr>
+        <tr>
+            <td>Employee Name</td>
+            <td>Name</td>
+        </tr>
+        <tr>
+            <td>Position</td>
+        <td>{{ edu.position }}</td>
+    </tr>
+    <tr>
+        <td>Employment Type</td>
+        <td>{{ edu.EmploymentType }}</td>
+      </tr>
+    </table>
+  </div> -->
+  </section>
+</div>
+
+<div *ngIf="hideDetailView && !loading" class="detail-container">
+  <div #detailmap style="height: 16em; position: relative"></div>
+  <h1 class="center-absolute emptyResult" *ngIf="data && !data.coordinates">
+    data Detail Not Available For Public View
+  </h1>
+</div>
+<!-- <tbody *ngFor="let edu of data.education; let i = index">
+    <div class="m-1 p-2">
+      <strong>Education Record {{ i + 1 }}</strong>
+    </div>
+    <tr>
+      <td>
+        <div>institution</div>
+        <strong>
+          {{ edu.educationalInstitution }}
+        </strong>
+      </td>
+      <td>
+        <div>Field of Study</div>
+        <strong>
+          {{ edu.fieldOfStudy }}
+        </strong>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div>Professional Title</div>
+        <strong>
+          {{ edu.professionalTitle }}
+        </strong>
+      </td>
+      <td>
+        <div>Date Recieved</div>
+        <strong>
+          {{ edu.dateRecieved }}
+        </strong>
+      </td>
+    </tr>
+  </tbody>
+</table> -->
+
+<!-- <div class="row">
+  <div class="col-6">
+      <table class=""></table>
+  </div>
+  <div class="col-6">
+    <table>
+      <tr>
+        <th>Address</th>
+      </tr>
+      <tr>
+        <td>Region</td>
+        <td>{{ data.address.region }}</td>
+      </tr>
+      <tr>
+        <td>Zone</td>
+        <td>{{ data.address.zone }}</td>
+      </tr>
+      <tr>
+        <td>City</td>
+        <td>{{ data.address.city }}</td>
+      </tr>
+      <tr>
+        <td>Woreda</td>
+        <td>{{ data.address.woreda }}</td>
+      </tr>
+      <tr>
+        <td>Kebele</td>
+        <td>{{ data.address.kebele }}</td>
+      </tr>
+    </table>
+    <div *ngFor="let edu of data.projects" class="mt-2">
+      <table>
+        <tr>
+          <th>Projects</th>
+        </tr>
+        <tr>
+          <td>Project Name</td>
+          <td>{{ edu.name }}</td>
+        </tr>
+        <tr>
+          <td>Project Value</td>
+          <td>{{ edu.projectValue }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div> -->
